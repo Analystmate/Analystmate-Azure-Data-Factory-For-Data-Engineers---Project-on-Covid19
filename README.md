@@ -1,5 +1,5 @@
-# Analystmate-Azure-Data-Factory-For-Data-Engineers---Project-on-Covid19
+# cd
 
 Hello This is lavdeep. 
 <br>
-I am learnin github
+I am learnin github.Learnings git is boring
