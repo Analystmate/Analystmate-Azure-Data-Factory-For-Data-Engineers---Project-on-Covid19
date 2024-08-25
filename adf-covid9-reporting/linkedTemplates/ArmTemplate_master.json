@@ -27,14 +27,6 @@
 			"type": "string",
 			"defaultValue": "/subscriptions/f1ae454b-c742-459a-b7d3-5aff1925f885/resourceGroups/Rg-Covid-reporting/providers/Microsoft.Storage/storageAccounts/covidreportingsaind"
 		},
-		"Tr_ingest_hosptital_addmision_data_properties_PL_ingest_data_from_https_parameters_sourcerelativeurl": {
-			"type": "string",
-			"defaultValue": "Analystmate/Analystmate-Azure-Data-Factory-For-Data-Engineers---Project-on-Covid19/blob/main/hospital_admissions.csv"
-		},
-		"Tr_ingest_hosptital_addmision_data_properties_PL_ingest_data_from_https_parameters_Sinkfilename": {
-			"type": "string",
-			"defaultValue": "hospital_admissions.csv"
-		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -76,12 +68,6 @@
 					},
 					"Event_Trigger_properties_typeProperties_scope": {
 						"value": "[parameters('Event_Trigger_properties_typeProperties_scope')]"
-					},
-					"Tr_ingest_hosptital_addmision_data_properties_PL_ingest_data_from_https_parameters_sourcerelativeurl": {
-						"value": "[parameters('Tr_ingest_hosptital_addmision_data_properties_PL_ingest_data_from_https_parameters_sourcerelativeurl')]"
-					},
-					"Tr_ingest_hosptital_addmision_data_properties_PL_ingest_data_from_https_parameters_Sinkfilename": {
-						"value": "[parameters('Tr_ingest_hosptital_addmision_data_properties_PL_ingest_data_from_https_parameters_Sinkfilename')]"
 					}
 				}
 			},

@@ -26,14 +26,6 @@
 		"Event_Trigger_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/f1ae454b-c742-459a-b7d3-5aff1925f885/resourceGroups/Rg-Covid-reporting/providers/Microsoft.Storage/storageAccounts/covidreportingsaind"
-		},
-		"Tr_ingest_hosptital_addmision_data_properties_PL_ingest_data_from_https_parameters_sourcerelativeurl": {
-			"type": "string",
-			"defaultValue": "Analystmate/Analystmate-Azure-Data-Factory-For-Data-Engineers---Project-on-Covid19/blob/main/hospital_admissions.csv"
-		},
-		"Tr_ingest_hosptital_addmision_data_properties_PL_ingest_data_from_https_parameters_Sinkfilename": {
-			"type": "string",
-			"defaultValue": "hospital_admissions.csv"
 		}
 	},
 	"variables": {
@@ -294,8 +286,8 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "Copy cases and death data",
-						"type": "Copy",
+						"name": "Lookup",
+						"type": "Lookup",
 						"dependsOn": [],
 						"policy": {
 							"timeout": "0.12:00:00",
@@ -307,77 +299,128 @@
 						"userProperties": [],
 						"typeProperties": {
 							"source": {
-								"type": "DelimitedTextSource",
+								"type": "JsonSource",
 								"storeSettings": {
-									"type": "HttpReadSettings",
-									"requestMethod": "GET"
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
 								},
 								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
+									"type": "JsonReadSettings"
 								}
 							},
-							"sink": {
-								"type": "DelimitedTextSink",
-								"storeSettings": {
-									"type": "AzureBlobFSWriteSettings"
-								},
-								"formatSettings": {
-									"type": "DelimitedTextWriteSettings",
-									"quoteAllText": true,
-									"fileExtension": ".txt"
-								}
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"typeConversion": true,
-								"typeConversionSettings": {
-									"allowDataTruncation": true,
-									"treatBooleanAsNumber": false
-								}
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "Ds_Source_https_github",
+							"dataset": {
+								"referenceName": "Ds_ecdc_githubfile_list",
 								"type": "DatasetReference",
-								"parameters": {
-									"RelativeURL": {
-										"value": "@pipeline().parameters.sourcerelativeurl",
-										"type": "Expression"
-									}
-								}
+								"parameters": {}
+							},
+							"firstRowOnly": false
+						}
+					},
+					{
+						"name": "ForEach1",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "Lookup",
+								"dependencyConditions": [
+									"Succeeded"
+								]
 							}
 						],
-						"outputs": [
-							{
-								"referenceName": "ds_Sink_for_https_dl",
-								"type": "DatasetReference",
-								"parameters": {
-									"Filename": {
-										"value": "@pipeline().parameters.Sinkfilename",
-										"type": "Expression"
-									}
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('Lookup').output.value",
+								"type": "Expression"
+							},
+							"activities": [
+								{
+									"name": "Copy cases and death data",
+									"type": "Copy",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"source": {
+											"type": "DelimitedTextSource",
+											"storeSettings": {
+												"type": "HttpReadSettings",
+												"requestMethod": "GET"
+											},
+											"formatSettings": {
+												"type": "DelimitedTextReadSettings"
+											}
+										},
+										"sink": {
+											"type": "DelimitedTextSink",
+											"storeSettings": {
+												"type": "AzureBlobFSWriteSettings"
+											},
+											"formatSettings": {
+												"type": "DelimitedTextWriteSettings",
+												"quoteAllText": true,
+												"fileExtension": ".txt"
+											}
+										},
+										"enableStaging": false,
+										"translator": {
+											"type": "TabularTranslator",
+											"typeConversion": true,
+											"typeConversionSettings": {
+												"allowDataTruncation": true,
+												"treatBooleanAsNumber": false
+											}
+										}
+									},
+									"inputs": [
+										{
+											"referenceName": "Ds_Source_https_github",
+											"type": "DatasetReference",
+											"parameters": {
+												"RelativeURL": {
+													"value": "@item().sourceRelativeURL",
+													"type": "Expression"
+												}
+											}
+										}
+									],
+									"outputs": [
+										{
+											"referenceName": "ds_Sink_for_https_dl",
+											"type": "DatasetReference",
+											"parameters": {
+												"Filename": {
+													"value": "@item().Sinkfilename",
+													"type": "Expression"
+												}
+											}
+										}
+									]
 								}
-							}
-						]
+							]
+						}
 					}
 				],
 				"policy": {
 					"elapsedTimeMetric": {}
 				},
-				"parameters": {
-					"sourcerelativeurl": {
-						"type": "string"
-					},
-					"Sinkfilename": {
-						"type": "string"
+				"variables": {
+					"lookupout": {
+						"type": "String"
 					}
 				},
 				"annotations": [],
 				"lastPublishTime": "2024-08-25T07:22:00Z"
 			},
 			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/Ds_ecdc_githubfile_list')]",
 				"[concat(variables('factoryId'), '/datasets/Ds_Source_https_github')]",
 				"[concat(variables('factoryId'), '/datasets/ds_Sink_for_https_dl')]"
 			]
@@ -634,10 +677,7 @@
 							"referenceName": "PL_ingest_data_from_https",
 							"type": "PipelineReference"
 						},
-						"parameters": {
-							"sourcerelativeurl": "[parameters('Tr_ingest_hosptital_addmision_data_properties_PL_ingest_data_from_https_parameters_sourcerelativeurl')]",
-							"Sinkfilename": "[parameters('Tr_ingest_hosptital_addmision_data_properties_PL_ingest_data_from_https_parameters_Sinkfilename')]"
-						}
+						"parameters": {}
 					}
 				],
 				"type": "ScheduleTrigger",
