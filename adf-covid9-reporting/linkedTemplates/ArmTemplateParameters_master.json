@@ -1,0 +1,36 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "adf-covid9-reporting"
+		},
+		"ls_ablob_covidreporting_connectionString": {
+			"value": ""
+		},
+		"ls_adls_covidreporting_accountKey": {
+			"value": ""
+		},
+		"ls_HttpServer_properties_typeProperties_url": {
+			"value": "https://github.com"
+		},
+		"ls_adls_covidreporting_properties_typeProperties_url": {
+			"value": "https://covdreportingadls.dfs.core.windows.net/"
+		},
+		"Event_Trigger_properties_typeProperties_scope": {
+			"value": "/subscriptions/f1ae454b-c742-459a-b7d3-5aff1925f885/resourceGroups/Rg-Covid-reporting/providers/Microsoft.Storage/storageAccounts/covidreportingsaind"
+		},
+		"Tr_ingest_hosptital_addmision_data_properties_PL_ingest_data_from_https_parameters_sourcerelativeurl": {
+			"value": "Analystmate/Analystmate-Azure-Data-Factory-For-Data-Engineers---Project-on-Covid19/blob/main/hospital_admissions.csv"
+		},
+		"Tr_ingest_hosptital_addmision_data_properties_PL_ingest_data_from_https_parameters_Sinkfilename": {
+			"value": "hospital_admissions.csv"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}

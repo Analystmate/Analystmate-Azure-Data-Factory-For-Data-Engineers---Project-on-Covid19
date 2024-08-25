@@ -1,0 +1,91 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "adf-covid9-reporting"
+		},
+		"ls_ablob_covidreporting_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ls_ablob_covidreporting'"
+		},
+		"ls_adls_covidreporting_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'ls_adls_covidreporting'"
+		},
+		"ls_HttpServer_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://github.com"
+		},
+		"ls_adls_covidreporting_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://covdreportingadls.dfs.core.windows.net/"
+		},
+		"Event_Trigger_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/f1ae454b-c742-459a-b7d3-5aff1925f885/resourceGroups/Rg-Covid-reporting/providers/Microsoft.Storage/storageAccounts/covidreportingsaind"
+		},
+		"Tr_ingest_hosptital_addmision_data_properties_PL_ingest_data_from_https_parameters_sourcerelativeurl": {
+			"type": "string",
+			"defaultValue": "Analystmate/Analystmate-Azure-Data-Factory-For-Data-Engineers---Project-on-Covid19/blob/main/hospital_admissions.csv"
+		},
+		"Tr_ingest_hosptital_addmision_data_properties_PL_ingest_data_from_https_parameters_Sinkfilename": {
+			"type": "string",
+			"defaultValue": "hospital_admissions.csv"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "adf-covid9-reporting_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"ls_ablob_covidreporting_connectionString": {
+						"value": "[parameters('ls_ablob_covidreporting_connectionString')]"
+					},
+					"ls_adls_covidreporting_accountKey": {
+						"value": "[parameters('ls_adls_covidreporting_accountKey')]"
+					},
+					"ls_HttpServer_properties_typeProperties_url": {
+						"value": "[parameters('ls_HttpServer_properties_typeProperties_url')]"
+					},
+					"ls_adls_covidreporting_properties_typeProperties_url": {
+						"value": "[parameters('ls_adls_covidreporting_properties_typeProperties_url')]"
+					},
+					"Event_Trigger_properties_typeProperties_scope": {
+						"value": "[parameters('Event_Trigger_properties_typeProperties_scope')]"
+					},
+					"Tr_ingest_hosptital_addmision_data_properties_PL_ingest_data_from_https_parameters_sourcerelativeurl": {
+						"value": "[parameters('Tr_ingest_hosptital_addmision_data_properties_PL_ingest_data_from_https_parameters_sourcerelativeurl')]"
+					},
+					"Tr_ingest_hosptital_addmision_data_properties_PL_ingest_data_from_https_parameters_Sinkfilename": {
+						"value": "[parameters('Tr_ingest_hosptital_addmision_data_properties_PL_ingest_data_from_https_parameters_Sinkfilename')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
