@@ -1,0 +1,28 @@
+{
+	"name": "Tr_ingest_hosptital_addmision_data",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "PL_ingest_data_from_https",
+					"type": "PipelineReference"
+				},
+				"parameters": {
+					"sourcerelativeurl": "Analystmate/Analystmate-Azure-Data-Factory-For-Data-Engineers---Project-on-Covid19/blob/main/hospital_admissions.csv",
+					"Sinkfilename": "hospital_admissions.csv"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Day",
+				"interval": 1,
+				"startTime": "2024-08-24T13:13:00",
+				"timeZone": "India Standard Time"
+			}
+		}
+	}
+}

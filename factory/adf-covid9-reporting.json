@@ -1,0 +1,9 @@
+{
+	"name": "adf-covid9-reporting",
+	"location": "uksouth",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "d644c125-42cb-45b6-85c6-77138284c608",
+		"tenantId": "0c071478-4aa1-4825-b9b7-eada2882dc90"
+	}
+}
