@@ -19,6 +19,9 @@
 				},
 				{
 					"name": "Pivotcount"
+				},
+				{
+					"name": "SelectOnlyReqiredField"
 				}
 			],
 			"scriptLines": [
@@ -38,10 +41,20 @@
 				"     limit: 100,",
 				"     ignoreNoFilesFound: false) ~> casesAndDeathSource",
 				"casesAndDeathSource filter(continent=='Europe' && not(isNull(country_code))) ~> filteronlyeurope",
-				"filteronlyeurope pivot(groupBy(continent),",
+				"SelectOnlyReqiredField pivot(groupBy(continent),",
 				"     pivotBy(indicator),",
 				"     columnNaming: '$N$V',",
-				"     lateral: true) ~> Pivotcount"
+				"     lateral: true) ~> Pivotcount",
+				"filteronlyeurope select(mapColumn(",
+				"          country,",
+				"          country_code,",
+				"          population,",
+				"          indicator,",
+				"          daily_count,",
+				"          source",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> SelectOnlyReqiredField"
 			]
 		}
 	}
