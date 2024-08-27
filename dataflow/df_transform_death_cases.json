@@ -18,9 +18,6 @@
 					"name": "filteronlyeurope"
 				},
 				{
-					"name": "select1"
-				},
-				{
 					"name": "Pivotcount"
 				}
 			],
@@ -41,18 +38,6 @@
 				"     limit: 100,",
 				"     ignoreNoFilesFound: false) ~> casesAndDeathSource",
 				"casesAndDeathSource filter(continent=='Europe' && not(isNull(country_code))) ~> filteronlyeurope",
-				"filteronlyeurope select(mapColumn(",
-				"          country,",
-				"          country_code,",
-				"          population,",
-				"          indicator,",
-				"          daily_count,",
-				"          source,",
-				"          each(match(name == \"date\"),",
-				"               \"Reported Date\" = $$)",
-				"     ),",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select1",
 				"filteronlyeurope pivot(groupBy(continent),",
 				"     pivotBy(indicator),",
 				"     columnNaming: '$N$V',",
