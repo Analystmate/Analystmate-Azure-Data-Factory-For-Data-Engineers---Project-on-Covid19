@@ -40,7 +40,7 @@
 				"     validateSchema: false,",
 				"     limit: 100,",
 				"     ignoreNoFilesFound: false) ~> casesAndDeathSource",
-				"casesAndDeathSource filter(continent=='Europe' && not(isNull(country_code))) ~> filteronlyeurope",
+				"casesAndDeathSource filter(ERROR_FUNCTION('')) ~> filteronlyeurope",
 				"SelectOnlyReqiredField pivot(groupBy(country,",
 				"          country_code,",
 				"          population,",
