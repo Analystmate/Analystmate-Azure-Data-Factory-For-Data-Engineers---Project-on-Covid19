@@ -789,7 +789,11 @@
 								"referenceName": "ds_death_and_cases_proccesd",
 								"type": "DatasetReference"
 							},
-							"name": "CasesAndDeathSink"
+							"name": "CasesAndDeathSink",
+							"rejectedDataLinkedService": {
+								"referenceName": "ls_adls_covidreporting",
+								"type": "LinkedServiceReference"
+							}
 						}
 					],
 					"transformations": [
@@ -875,18 +879,21 @@
 						"     skipDuplicateMapOutputs: true) ~> Selectforsink",
 						"Selectforsink sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
+						"     truncate: true,",
 						"     umask: 0022,",
 						"     preCommands: [],",
 						"     postCommands: [],",
 						"     skipDuplicateMapInputs: true,",
-						"     skipDuplicateMapOutputs: true) ~> CasesAndDeathSink"
+						"     skipDuplicateMapOutputs: true,",
+						"     partitionBy('hash', 1)) ~> CasesAndDeathSink"
 					]
 				}
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/ds_death_cases')]",
 				"[concat(variables('factoryId'), '/datasets/DS_for_country_lookup')]",
-				"[concat(variables('factoryId'), '/datasets/ds_death_and_cases_proccesd')]"
+				"[concat(variables('factoryId'), '/datasets/ds_death_and_cases_proccesd')]",
+				"[concat(variables('factoryId'), '/linkedServices/ls_adls_covidreporting')]"
 			]
 		},
 		{
@@ -952,6 +959,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
+						"folderPath": "ecdc/deaths",
 						"fileSystem": "processed"
 					},
 					"columnDelimiter": ",",
@@ -999,7 +1007,8 @@
 								"coreCount": 8,
 								"computeType": "General"
 							},
-							"traceLevel": "Fine"
+							"traceLevel": "Fine",
+							"runConcurrently": false
 						}
 					}
 				],
