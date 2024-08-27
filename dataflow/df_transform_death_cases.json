@@ -48,7 +48,7 @@
 				"          Reported),",
 				"     pivotBy(indicator, ['confirmed cases', 'deaths']),",
 				"     Count = sum(daily_count),",
-				"     columnNaming: '$N$V',",
+				"     columnNaming: '$N_$V',",
 				"     lateral: true) ~> Pivotcount",
 				"filteronlyeurope select(mapColumn(",
 				"          country,",
