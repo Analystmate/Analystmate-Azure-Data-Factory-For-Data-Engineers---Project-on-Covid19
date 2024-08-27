@@ -97,9 +97,7 @@
 				"          population = Pivotcount@population,",
 				"          Count_deaths,",
 				"          Reported,",
-				"          source,",
-				"          country = Countrylookup@country,",
-				"          population = Countrylookup@population",
+				"          source",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> Selectforsink"
