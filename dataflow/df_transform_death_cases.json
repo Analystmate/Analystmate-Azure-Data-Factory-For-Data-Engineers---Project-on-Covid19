@@ -46,7 +46,7 @@
 				"          population,",
 				"          source,",
 				"          Reported),",
-				"     pivotBy(indicator),",
+				"     pivotBy(indicator, ['confirmed cases', 'deaths']),",
 				"     columnNaming: '$N$V',",
 				"     lateral: true) ~> Pivotcount",
 				"filteronlyeurope select(mapColumn(",
