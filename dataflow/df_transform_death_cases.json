@@ -19,7 +19,11 @@
 					"name": "Countrylookup"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"name": "CasesAndDeathSink"
+				}
+			],
 			"transformations": [
 				{
 					"name": "filteronlyeurope"
@@ -100,7 +104,11 @@
 				"          source",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> Selectforsink"
+				"     skipDuplicateMapOutputs: true) ~> Selectforsink",
+				"Selectforsink sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> CasesAndDeathSink"
 			]
 		}
 	}
