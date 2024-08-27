@@ -5,14 +5,23 @@
 		"typeProperties": {
 			"sources": [
 				{
+					"dataset": {
+						"referenceName": "Df_row_cases_Ds",
+						"type": "DatasetReference"
+					},
 					"name": "casesAndDeathSource"
 				}
 			],
 			"sinks": [],
 			"transformations": [],
 			"scriptLines": [
-				"source(allowSchemaDrift: true,",
-				"     validateSchema: false) ~> casesAndDeathSource"
+				"source(output(",
+				"          {<!DOCTYPE html>} as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     limit: 100,",
+				"     ignoreNoFilesFound: false) ~> casesAndDeathSource"
 			]
 		}
 	}
