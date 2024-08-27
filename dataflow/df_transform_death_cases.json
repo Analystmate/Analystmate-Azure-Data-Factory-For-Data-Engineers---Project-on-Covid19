@@ -25,7 +25,11 @@
 						"referenceName": "ds_death_and_cases_proccesd",
 						"type": "DatasetReference"
 					},
-					"name": "CasesAndDeathSink"
+					"name": "CasesAndDeathSink",
+					"rejectedDataLinkedService": {
+						"referenceName": "ls_adls_covidreporting",
+						"type": "LinkedServiceReference"
+					}
 				}
 			],
 			"transformations": [
@@ -115,7 +119,17 @@
 				"     preCommands: [],",
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> CasesAndDeathSink"
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          country,",
+				"          country_code_2_digit,",
+				"          country_code_3_digit,",
+				"          {Count_confirmed cases},",
+				"          population,",
+				"          Count_deaths,",
+				"          Reported,",
+				"          source",
+				"     )) ~> CasesAndDeathSink"
 			]
 		}
 	}
