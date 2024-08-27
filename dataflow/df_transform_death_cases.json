@@ -21,7 +21,7 @@
 					"name": "select1"
 				},
 				{
-					"name": "pivot1"
+					"name": "Pivotcount"
 				}
 			],
 			"scriptLines": [
@@ -56,7 +56,7 @@
 				"filteronlyeurope pivot(groupBy(continent),",
 				"     pivotBy(indicator),",
 				"     columnNaming: '$N$V',",
-				"     lateral: true) ~> pivot1"
+				"     lateral: true) ~> Pivotcount"
 			]
 		}
 	}
