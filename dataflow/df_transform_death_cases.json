@@ -13,7 +13,11 @@
 				}
 			],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "filteronlyeurope"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
 				"          country as string,",
@@ -23,13 +27,14 @@
 				"          indicator as string,",
 				"          daily_count as integer,",
 				"          date as date,",
-				"          rate_14_day as string,",
+				"          rate_14_day as double,",
 				"          source as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     limit: 100,",
-				"     ignoreNoFilesFound: false) ~> casesAndDeathSource"
+				"     ignoreNoFilesFound: false) ~> casesAndDeathSource",
+				"casesAndDeathSource filter(continent=='Europe' && not(isNull(country_code))) ~> filteronlyeurope"
 			]
 		}
 	}
