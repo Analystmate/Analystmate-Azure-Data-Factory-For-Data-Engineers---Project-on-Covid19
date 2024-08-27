@@ -53,7 +53,9 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",
-				"select1 pivot(columnNaming: '$N$V',",
+				"filteronlyeurope pivot(groupBy(continent),",
+				"     pivotBy(indicator),",
+				"     columnNaming: '$N$V',",
 				"     lateral: true) ~> pivot1"
 			]
 		}
