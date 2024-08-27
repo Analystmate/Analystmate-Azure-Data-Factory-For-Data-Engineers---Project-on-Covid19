@@ -1,9 +1,9 @@
 {
-	"name": "PL_For_run_df",
+	"name": "PL_Invoke_df",
 	"properties": {
 		"activities": [
 			{
-				"name": "Data flow1",
+				"name": "Invoke df",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
