@@ -16,6 +16,9 @@
 			"transformations": [
 				{
 					"name": "filteronlyeurope"
+				},
+				{
+					"name": "select1"
 				}
 			],
 			"scriptLines": [
@@ -34,7 +37,20 @@
 				"     validateSchema: false,",
 				"     limit: 100,",
 				"     ignoreNoFilesFound: false) ~> casesAndDeathSource",
-				"casesAndDeathSource filter(continent=='Europe' && not(isNull(country_code))) ~> filteronlyeurope"
+				"casesAndDeathSource filter(continent=='Europe' && not(isNull(country_code))) ~> filteronlyeurope",
+				"filteronlyeurope select(mapColumn(",
+				"          country,",
+				"          country_code,",
+				"          continent,",
+				"          population,",
+				"          indicator,",
+				"          daily_count,",
+				"          date,",
+				"          rate_14_day,",
+				"          source",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1"
 			]
 		}
 	}
