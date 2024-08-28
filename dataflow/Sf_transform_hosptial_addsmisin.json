@@ -70,7 +70,7 @@
 				"     pickup: 'any',",
 				"     broadcast: 'auto')~> lookupCountry",
 				"lookupCountry split(ERROR_FUNCTION(''),",
-				"     disjoint: false) ~> Splitdailyfromweekly@(, )"
+				"     disjoint: false) ~> Splitdailyfromweekly@(Weekly, Daily)"
 			]
 		}
 	}
