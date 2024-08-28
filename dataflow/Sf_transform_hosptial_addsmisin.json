@@ -74,7 +74,7 @@
 				"     broadcast: 'auto')~> lookupCountry",
 				"SelectRequiredField2 split(indicator =='Weekly new hospital admissions per 100k' || indicator == \"Weekly new ICU admissions per 100k\",",
 				"     disjoint: false) ~> Splitdailyfromweekly@(Weekly, Daily)",
-				"lookupCountry select(mapColumn(",
+				"CountryLookup select(mapColumn(",
 				"          country = SelectRequiredField@country,",
 				"          indicator,",
 				"          {Reported date},",
