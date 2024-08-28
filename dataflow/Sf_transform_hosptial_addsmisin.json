@@ -62,7 +62,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> SelectRequiredField",
-				"SelectRequiredField lookup(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
+				"SelectRequiredField, CountryLookup lookup(SelectRequiredField@country == CountryLookup@country,",
 				"     multiple: false,",
 				"     pickup: 'any',",
 				"     broadcast: 'auto')~> lookupCountry"
