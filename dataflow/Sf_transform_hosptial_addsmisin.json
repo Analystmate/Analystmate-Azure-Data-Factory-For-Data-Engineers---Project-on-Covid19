@@ -26,6 +26,9 @@
 				},
 				{
 					"name": "lookupCountry"
+				},
+				{
+					"name": "Splitdailyfromweekly"
 				}
 			],
 			"scriptLines": [
@@ -65,7 +68,9 @@
 				"SelectRequiredField, CountryLookup lookup(SelectRequiredField@country == CountryLookup@country,",
 				"     multiple: false,",
 				"     pickup: 'any',",
-				"     broadcast: 'auto')~> lookupCountry"
+				"     broadcast: 'auto')~> lookupCountry",
+				"lookupCountry split(ERROR_FUNCTION(''),",
+				"     disjoint: false) ~> Splitdailyfromweekly@(, )"
 			]
 		}
 	}
