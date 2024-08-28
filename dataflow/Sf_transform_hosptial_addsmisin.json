@@ -10,6 +10,9 @@
 						"type": "DatasetReference"
 					},
 					"name": "HospitalAdmissions"
+				},
+				{
+					"name": "source1"
 				}
 			],
 			"sinks": [],
@@ -32,6 +35,8 @@
 				"     validateSchema: false,",
 				"     limit: 100,",
 				"     ignoreNoFilesFound: false) ~> HospitalAdmissions",
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false) ~> source1",
 				"HospitalAdmissions select(mapColumn(",
 				"          country,",
 				"          indicator,",
