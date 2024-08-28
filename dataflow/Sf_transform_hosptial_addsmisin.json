@@ -1,0 +1,48 @@
+{
+	"name": "Sf_transform_hosptial_addsmisin",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_hosptital_Addmissin_data",
+						"type": "DatasetReference"
+					},
+					"name": "HospitalAdmissions"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "SelectRequiredField"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          country as string,",
+				"          indicator as string,",
+				"          date as string,",
+				"          year_week as string,",
+				"          value as string,",
+				"          source as string,",
+				"          url as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     limit: 100,",
+				"     ignoreNoFilesFound: false) ~> HospitalAdmissions",
+				"HospitalAdmissions select(mapColumn(",
+				"          country,",
+				"          indicator,",
+				"          {Reported date} = date,",
+				"          year_week,",
+				"          value,",
+				"          source",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> SelectRequiredField"
+			]
+		}
+	}
+}
