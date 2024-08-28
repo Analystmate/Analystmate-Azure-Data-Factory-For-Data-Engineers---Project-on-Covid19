@@ -115,7 +115,7 @@
 				"     skipDuplicateMapOutputs: true) ~> KeepKeyField",
 				"KeepKeyField split(indicator == \"Weekly new hospital admissions per 100k\" || indicator == \"Weekly new ICU admissions per 100k\",",
 				"     disjoint: false) ~> split1@(Weekly, Daily)",
-				"StDimDate derive(ecdc_YearWeek = ERROR_FUNCTION('')) ~> DerivedEcdcYearWeek"
+				"StDimDate derive(ecdc_YearWeek = year + \"-W\" + lpad(week_of_year,2,'0')) ~> DerivedEcdcYearWeek"
 			]
 		}
 	}
