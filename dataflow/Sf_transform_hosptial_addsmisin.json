@@ -69,7 +69,7 @@
 				"     multiple: false,",
 				"     pickup: 'any',",
 				"     broadcast: 'auto')~> lookupCountry",
-				"lookupCountry split(ERROR_FUNCTION(''),",
+				"lookupCountry split(indicator =='Daily hospital occupancy',",
 				"     disjoint: false) ~> Splitdailyfromweekly@(Weekly, Daily)"
 			]
 		}
