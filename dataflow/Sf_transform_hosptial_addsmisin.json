@@ -69,7 +69,7 @@
 				"     multiple: false,",
 				"     pickup: 'any',",
 				"     broadcast: 'auto')~> lookupCountry",
-				"lookupCountry split(indicator =='Daily hospital occupancy',",
+				"lookupCountry split(indicator =='Weekly new hospital admissions per 100k' || indicator == \"Weekly new ICU admissions per 100k\",",
 				"     disjoint: false) ~> Splitdailyfromweekly@(Weekly, Daily)"
 			]
 		}
