@@ -2,16 +2,12 @@
 	"name": "Tr_ingest_hosptital_addmision_data",
 	"properties": {
 		"annotations": [],
-		"runtimeState": "Started",
+		"runtimeState": "Stopped",
 		"pipelines": [
 			{
 				"pipelineReference": {
 					"referenceName": "PL_ingest_data_from_https",
 					"type": "PipelineReference"
-				},
-				"parameters": {
-					"sourcerelativeurl": "Analystmate/Analystmate-Azure-Data-Factory-For-Data-Engineers---Project-on-Covid19/blob/main/hospital_admissions.csv",
-					"Sinkfilename": "hospital_admissions.csv"
 				}
 			}
 		],
