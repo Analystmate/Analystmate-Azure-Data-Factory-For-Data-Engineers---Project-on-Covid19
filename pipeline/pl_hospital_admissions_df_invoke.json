@@ -1,6 +1,32 @@
 {
-	"name": "pipeline1",
+	"name": "pl_hospital_admissions_df_invoke",
 	"properties": {
+		"activities": [
+			{
+				"name": "Df_invoke_hospital_admissions_weekly",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "df_hospital_admission",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 32,
+						"computeType": "MemoryOptimized"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
 		"annotations": []
 	}
 }
