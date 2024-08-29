@@ -75,7 +75,7 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> Countrylookup",
-				"casesAndDeathSource filter(continent==\"Europe\") ~> filteronlyeurope",
+				"casesAndDeathSource filter(continent == \"Europe\") ~> filteronlyeurope",
 				"SelectOnlyReqiredField pivot(groupBy(country,",
 				"          country_code,",
 				"          population,",
