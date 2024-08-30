@@ -8,11 +8,23 @@
 		"ls_AzureDatabricks_accessToken": {
 			"value": ""
 		},
+		"ls_AzureSqlDatabase_password": {
+			"value": ""
+		},
 		"ls_ablob_covidreporting_connectionString": {
 			"value": ""
 		},
 		"ls_adls_covidreporting_accountKey": {
 			"value": ""
+		},
+		"ls_AzureSqlDatabase_properties_typeProperties_server": {
+			"value": "coved-srv.database.windows.net"
+		},
+		"ls_AzureSqlDatabase_properties_typeProperties_database": {
+			"value": "Covid-db"
+		},
+		"ls_AzureSqlDatabase_properties_typeProperties_userName": {
+			"value": "lavdeep"
 		},
 		"ls_HttpServer_properties_typeProperties_url": {
 			"value": "https://github.com"

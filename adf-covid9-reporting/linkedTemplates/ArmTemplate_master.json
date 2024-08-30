@@ -11,6 +11,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accessToken' of 'ls_AzureDatabricks'"
 		},
+		"ls_AzureSqlDatabase_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'ls_AzureSqlDatabase'"
+		},
 		"ls_ablob_covidreporting_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ls_ablob_covidreporting'"
@@ -18,6 +22,18 @@
 		"ls_adls_covidreporting_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'ls_adls_covidreporting'"
+		},
+		"ls_AzureSqlDatabase_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "coved-srv.database.windows.net"
+		},
+		"ls_AzureSqlDatabase_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "Covid-db"
+		},
+		"ls_AzureSqlDatabase_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "lavdeep"
 		},
 		"ls_HttpServer_properties_typeProperties_url": {
 			"type": "string",
@@ -61,11 +77,23 @@
 					"ls_AzureDatabricks_accessToken": {
 						"value": "[parameters('ls_AzureDatabricks_accessToken')]"
 					},
+					"ls_AzureSqlDatabase_password": {
+						"value": "[parameters('ls_AzureSqlDatabase_password')]"
+					},
 					"ls_ablob_covidreporting_connectionString": {
 						"value": "[parameters('ls_ablob_covidreporting_connectionString')]"
 					},
 					"ls_adls_covidreporting_accountKey": {
 						"value": "[parameters('ls_adls_covidreporting_accountKey')]"
+					},
+					"ls_AzureSqlDatabase_properties_typeProperties_server": {
+						"value": "[parameters('ls_AzureSqlDatabase_properties_typeProperties_server')]"
+					},
+					"ls_AzureSqlDatabase_properties_typeProperties_database": {
+						"value": "[parameters('ls_AzureSqlDatabase_properties_typeProperties_database')]"
+					},
+					"ls_AzureSqlDatabase_properties_typeProperties_userName": {
+						"value": "[parameters('ls_AzureSqlDatabase_properties_typeProperties_userName')]"
 					},
 					"ls_HttpServer_properties_typeProperties_url": {
 						"value": "[parameters('ls_HttpServer_properties_typeProperties_url')]"
