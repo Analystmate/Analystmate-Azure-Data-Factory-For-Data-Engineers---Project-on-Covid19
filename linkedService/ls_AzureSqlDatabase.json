@@ -1,0 +1,17 @@
+{
+	"name": "ls_AzureSqlDatabase",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"server": "coved-srv.database.windows.net",
+			"database": "Covid-db",
+			"encrypt": "mandatory",
+			"trustServerCertificate": true,
+			"authenticationType": "SQL",
+			"userName": "lavdeep",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQEFGQ0FENjRGLTBBQzItNEU4Qi1BNDczLUZDN0FGNUQ2NkFDN185NTE3YTI2NS0xM2QxLTRiZWEtODdiZi1jNWE0ZWM3Nzc5ZDkiDQp9"
+		}
+	}
+}
