@@ -7,6 +7,10 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "adf-covid9-reporting"
 		},
+		"ls_AzureDatabricks_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'ls_AzureDatabricks'"
+		},
 		"ls_ablob_covidreporting_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ls_ablob_covidreporting'"
@@ -53,6 +57,9 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"ls_AzureDatabricks_accessToken": {
+						"value": "[parameters('ls_AzureDatabricks_accessToken')]"
 					},
 					"ls_ablob_covidreporting_connectionString": {
 						"value": "[parameters('ls_ablob_covidreporting_connectionString')]"

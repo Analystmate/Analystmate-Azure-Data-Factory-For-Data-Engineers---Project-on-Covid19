@@ -5,6 +5,9 @@
 		"factoryName": {
 			"value": "adf-covid9-reporting"
 		},
+		"ls_AzureDatabricks_accessToken": {
+			"value": ""
+		},
 		"ls_ablob_covidreporting_connectionString": {
 			"value": ""
 		},
